@@ -7,7 +7,7 @@
  *Name: Dunni Adenuga
  *Date: 25/08/2015
  *
- *Lab/Assignment: Lab 01
+ *Lab/Assignment: Lab 001
  *
  *Description:Introduction to Git and Java.
  *
