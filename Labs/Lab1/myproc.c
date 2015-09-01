@@ -8,8 +8,9 @@ int main()
 {
   pid_t pid;//process id
   int i = 1;//variable counter for parent
-  int x = 1; //variable counter for child
-  pid = fork();
+  int x = 1; //variable counter for child 1
+  int y = 1; //variable counter for child 2
+  pid = fork();//make child 1
  
       if(pid == 0)
 	{
@@ -21,11 +22,23 @@ int main()
 	}
        else
 	{
+	  pid = fork();//make child 2
+	  if(pid ==0)
+	    {
+	       while(1)
+		 {
+	  printf("child2: %d\n",y);
+	  y++;
+		 }
+	    }
+	  else
+	    {
 	  while(1)
 	    {
 	  printf("parent: %d\n", i);
 	  i++;
-	  //pid = fork();
+   
+	    }
 	    }
 	}
 }
