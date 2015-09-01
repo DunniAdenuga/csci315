@@ -1,0 +1,6 @@
+Problem 1
+(b)
+There would be two instances: one memory space for the parent and one for the child.
+When fork() is called, a copy of the parent is made for the child but the child has it's own memory space.
+
+
