@@ -2,3 +2,20 @@ Problem 1
 (b)
 There would be two instances: one memory space for the parent and one for the child.
 When fork() is called, a copy of the parent is made for the child but the child has it's own memory space.
+
+Problem 2
+a) variables i and x are global variables and can be accessed by all methods.
+   variables pid, j and y are local variables and are only available to the main method.
+b) 
+(1)Since child initially sees what the parent sees, I can safely assume that the data and stack segment were copied over to child.
+(2) Changes made by the child can't be seen by the parent so, this shows they don't access the same memory space.
+
+
+
+/*
+Definition of Stack Memory Segment. The stack memory segment is an area of memory allotted for automatic variables. Automatic variables are allocated and de-allocated automatically when program flow enters and leaves the variable's scope.
+*/
+
+/*
+In computing, a data segment (often denoted .data) is a portion of an object file or the corresponding virtual address space of a program that contains initialized static variables, that is, global variables and static local variables.
+*/
