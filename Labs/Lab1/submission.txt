@@ -1,0 +1,8 @@
+Problem 1:
+It was completed and works well.
+
+Problem 2:
+All specifications are indicated in code but once the wrapper class was introduced, everything became messed up. Still working on it.
+
+Problem 3: 
+It was completed and works well.
