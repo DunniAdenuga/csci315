@@ -1,0 +1,8 @@
+1. From Pre-Lab 1, I discovered that a copy of the parent's heap is made for the child process so, they contain the same value.The address of the heap came out to be the same. I changed the value of the string in the parent but it didn't affect the value in the child and vice versa.
+
+
+2. A pipe is like a file(it's just more synchronized), so, when a parent creates a child, the child and parent have the same file descriptor for the pipe.
+
+3.The pipe is more synchronized compared to the file. When the child accesses the pipe, it's certain the parent is done with it (I didn't notice any muddling up of the readings compared to the files).
+They both require file descriptors.
+A pipe has two ends and if you're writing , you have to close the reading end and vice versa. This was not necessary with files.
