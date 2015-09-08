@@ -4,3 +4,13 @@ There would be two instances: one memory space for the parent and one for the ch
 When fork() is called, a copy of the parent is made for the child but the child has it's own memory space.
 
 
+Problem 2
+a) variables i and x are global variables and can be accessed by all methods.
+   variables pid, j and y are local variables and are only available to the main method.
+b) 
+(1)Since child initially sees what the parent sees, I can safely assume that the data and stack segment were copied over to child.
+(2) Changes made by the child can't be seen by the parent so, this shows they don't access the same memory space.
+
+d)
+1. Yes.I closed the parent process and the child process was still able to read from the file.
+2.Yes. When I tried to read more from the file into the parent the letters were muddled up which shows the child reading was affecting it.
