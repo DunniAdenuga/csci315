@@ -80,9 +80,9 @@ else
 close(pcfd[READEND]);
 
 /* write to the pipe */
- while(writemsg[i] != NULL)
+ while(readmsg[i] != NULL)
    {
-     Write(cpfd[WRITEEND],toupper(writemsg[i]), 1);
+     Write(cpfd[WRITEEND],toupper(readmsg[i]), 1);
      //write(fd[WRITEEND],&writemsg[i],1);
      //printf("%c ", writemsg[i]);
    i++;
