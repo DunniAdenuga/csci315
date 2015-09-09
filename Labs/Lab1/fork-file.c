@@ -36,8 +36,8 @@ int main(int argc, char* argv[]) {
   write(fileDesc, "this is a test for processes created with fork\nthis is another line",100);
   close(fileDesc);
 
-  Fork();
-  pid = fork();
+  //Fork();
+  pid = Fork();
   if (pid == 0) 
     {
     // child process
