@@ -1,0 +1,16 @@
+Problem 1:
+Completed.
+Works to specification.
+
+Problem 2:
+Completed.
+Works to specification.
+Doesn't terminate gracefully.
+
+Problem 3:
+Completed.
+Works to specification.
+
+Problem 4:
+Completed.
+Not tested. Should work.
