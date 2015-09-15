@@ -1,0 +1,20 @@
+Problem 2
+
+1. 
+$ gcc -std=gnu99 -Wall summation.c -o summation
+summation.c: In function ‘main’:
+summation.c:76: warning: unused variable ‘status’
+/tmp/ccXi6UuC.o: In function `SumExp':
+summation.c:(.text+0x86): undefined reference to `pow'
+/tmp/ccXi6UuC.o: In function `main':
+summation.c:(.text+0x29d): undefined reference to `pthread_create'
+summation.c:(.text+0x31f): undefined reference to `pthread_join'
+collect2: ld returned 1 exit status
+
+2.
+-lm
+
+3.
+/tmp/cce6Ds4j.o: In function `main':
+summation.c:(.text+0x29d): undefined reference to `pthread_create'
+summation.c:(.text+0x31f): undefined reference to `pthread_join'
