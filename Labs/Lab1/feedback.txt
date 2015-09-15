@@ -1,9 +1,10 @@
+
 ------------------------------------------------------------
 Lab1 feedback for Adenuga, Dunni (ia005)
 ------------------------------------------------------------
 lab1 problem 1 a): fork.c compiles
 	Score: 0 / 5
-	Comment: No fork.c file 
+	Comment: No fork.c file
 lab1 problem 1 b): describe how num is shared or not with the child
 	Score: 5 / 5
 lab1 problem 1 c): fork-wait.c waits for the child to exit
