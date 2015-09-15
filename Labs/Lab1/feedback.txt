@@ -8,7 +8,24 @@ lab1 problem 1 b): describe how num is shared or not with the child
 	Score: 5 / 5
 lab1 problem 1 c): fork-wait.c waits for the child to exit
 	Score: 10 / 10
+lab1 problem 2 c): fork-file.c compiles and writes and reads 5 characters
+	Score: 3 / 6
+	Comment: Code complies but strange characters are printed to the screen instead of letters
+lab1 problem 2 d): Answers to the following questions: (1) if one process closes the file, can the other still read from it?; (2) say the child process reads from the “inherited” file; does that affect what the parent will read from the same file descriptor?
+	Score: 6 / 6
+lab1 problem 2 e): Created Fork wrapper for fork that checks for error and if so uses perror/exit
+	Score: 4 / 4
+	Comment: Please fix curly braces in the future
+lab1 problem 3 a): created catcount.c
+	Score: 15 / 15
+lab1 problem 3 b): have print_enviornment in catcount.c
+	Score: 10 / 10
+lab1 problem 2 a): Read fork-data.c carefully, then compile and run it. In answers.txt explain in which segment of your running program the following variables reside: pid, x, y, i, j, and pid.
+	Score: 2 / 4
+	Comment: Answer is correct, but we were also looking for which data degments they lie in, i.e. x and i are in the data segment and the rest are on the stack
+lab1 problem 2 b): In answers.txt, discuss whether running fork-data.c allows you to conclude: (1) if the data segment and the stack segment of a parent process are copied over to the child process; (2) whether changes made to these variables by the child are seen by the parent. What you discover for (2) will tell you whether parent and child share the same memory for data and stack segments or if they each have their own separate segments.
+	Score: 5 / 5
 ------------------------------------------------------------
-TOTAL 15.0 / 100
+TOTAL 60.0 / 100
 ------------------------------------------------------------
 
