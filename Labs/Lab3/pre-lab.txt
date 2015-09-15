@@ -1,0 +1,6 @@
+1.Do the threads order of execution match the order in which they were created?
+At first, without the while loop, the execution followed the order they were created. Then, the threads ran concurrrently;
+
+
+2.Looking at the characters that a printed to the standard output, do the threads always follow the same order of execution? That is, we want to know whether if you always see thread 1, then thread 2, then thread 3, etc., repeating in a predictable order.
+No, not always. I noticed thread 3 takes a while to show up , maybe because it's more CPU intensive since it has to compute from 1 to 10,000.
