@@ -16,14 +16,18 @@ strcpy(string, "I'm new to C...");
 pid = fork();
 if (pid == 0)
   {
-    printf("String is: %s\n", string);
+    printf("String is: %s  Address is %u\n", string, string);
+    strcpy(string, "I'm new to C bla bla...");
+    printf("String is: %s Address is %u\n", string, string);
   }
  else
    {
      pid = fork();
      if (pid == 0)
        {
-	 printf("String is: %s\n", string);
+	 printf("String is: %s Address is %u\n", string, string);
+	 
+	 printf("String is: %s Address is %u\n", string, string);
        }
      wait(&status);
      exit(0);
