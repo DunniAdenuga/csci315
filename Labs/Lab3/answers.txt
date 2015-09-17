@@ -18,3 +18,13 @@ collect2: ld returned 1 exit status
 /tmp/cce6Ds4j.o: In function `main':
 summation.c:(.text+0x29d): undefined reference to `pthread_create'
 summation.c:(.text+0x31f): undefined reference to `pthread_join'
+
+Problem 3
+
+1. The program first creates a structure with the attributes of the sructure being the arguments the function in a thread needs. 
+2.calloc with prototype void *calloc(size_t n, size_t size);  allocates memory for an array of n elements of size bytes each. It's preferable because it allocates memory for an array.
+3.A thread is in detached state if you don't have to wait for its completion in any other thread that calls pthread_join() .
+This summation program shouldn't have detached threads, since the final solution(summation) depends on the result of each thread.
+4.A structure is created with a variable that stores the result. While creating the threads, the threads are made joinable so that they wait for each other's completion using pthread_join. The results from each thread is then summed.
+5.When I called exit(0) halfway through the computation of the first thread, the program ended abruptly. 
+6. When I called execl(3) halfway through the computation of thread 1, the command "ls" was executed and the program ended.
