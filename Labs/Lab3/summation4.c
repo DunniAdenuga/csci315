@@ -159,7 +159,7 @@ int main (int argc, char *argv[]) {
 	if(((tv2.tv_usec - tv1.tv_usec)/1000000.0) < 0)
 	  {
 	    	double elapsed = (tv2.tv_sec - tv1.tv_sec - 1) + 
-		  (((tv2.tv_usec - tv1.tv_usec)/1000000.0)+1);
+		  (((tv2.tv_usec - tv1.tv_usec)/1000000.0)+ 0.000001);
 	    }
 	printf("The time  for program execution is: %f secs\n", elapsed);
 }
