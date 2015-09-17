@@ -28,3 +28,7 @@ This summation program shouldn't have detached threads, since the final solution
 4.A structure is created with a variable that stores the result. While creating the threads, the threads are made joinable so that they wait for each other's completion using pthread_join. The results from each thread is then summed.
 5.When I called exit(0) halfway through the computation of the first thread, the program ended abruptly. 
 6. When I called execl(3) halfway through the computation of thread 1, the command "ls" was executed and the program ended.
+
+Problem 5
+1. If the C functions work the way they are supposed to, yes!I used the thread safe function ctime_r. I also made the start and end times a property of each thread.
+2. A problem could have occured if  ctime() was used since it returns a static   data variable i.e every thread calling that thread would have the same return time. Using thread safe ctime_r would solve the problem.
