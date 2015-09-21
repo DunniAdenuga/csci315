@@ -2,7 +2,7 @@
 Lab1 feedback for Adenuga, Dunni (ia005)
 ------------------------------------------------------------
 lab1 problem 1 a): fork.c compiles
-	Score: 0 / 5
+	Score: 5 / 5
 	Comment: No fork.c file 
 lab1 problem 1 b): describe how num is shared or not with the child
 	Score: 5 / 5
@@ -28,6 +28,6 @@ lab1 problem 2 b): In answers.txt, discuss whether running fork-data.c allows yo
 prelab: Score from prelab (checked in lab)
 	Score: 30 / 30
 ------------------------------------------------------------
-TOTAL 90.0 / 100
+TOTAL 95.0 / 100
 ------------------------------------------------------------
 
