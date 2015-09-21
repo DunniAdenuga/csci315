@@ -49,6 +49,7 @@ int main(int argc, char *argv[])
       }
      wait(&status);
      printf("I waited for the child. The child is done. Now, I end.\n");
+     exit(0);
     }
    
 }
