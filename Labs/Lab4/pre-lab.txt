@@ -1,0 +1,17 @@
+P1)
+socket() and open() command require the <sys/types.h> header while pipe() requires the <unistd.h> header.socket() and open() return file descriptors while pipe() returns 0 or -1 depending on success or failure. Pipe returns file descriptors too but stores it in the array sent to it in its argument. pipe() and open() require two arguments while socket() requires three arguments.
+
+P2)
+1. One program echod is the server while echoreq makes requests to the server.
+The server and client first set their family to the internet. Then a socket is created by both. The client tries to connect using the server's address in the connect() function. The server binds itself to this same address and then sets itself to listen for and accept incoming connection requests from the client.
+
+2. After a socket has been created, bind(2) assigns the address sent to it in its argument, to the the socket descriptor returned when socket() was called. It is also called assigning a name to a socket.
+
+3. The call connect(2) connects a specified socket descriptor to a specified address.
+
+4. The listen(2) call marks a socket descriptor as a listening device. It assigns it as a passive socket that will be used to accept incoming connection requests using accept. 
+
+5. The accept(2) call is used with connection-based socket types. It extracts the first connection request on the queue of the pending connections for the listening sockets. It is usually called after the listen(2) call.
+
+6. I will use the sendto(2) to send a message to the server and client  and the recvfrom()  to receive mesages from the client and server. 
+
