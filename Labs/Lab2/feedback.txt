@@ -1,0 +1,16 @@
+------------------------------------------------------------
+Lab2 feedback for Adenuga, Dunni (ia005)
+------------------------------------------------------------
+lab2 problem 1): pipes.c sends a message one char at a time, child reads one at a time until EOF and Pipe, Read, and Write are wrapped.
+	Score: 30 / 30
+lab2 problem 2): Two pipes parent writes, child reads uppercases and writes back to parent, parent reads and prints
+	Score: 13 / 15
+	Comment: -2: reading an additional @ character after the uppercase message - watch how many chars are being read and that the escape char is included 
+- also, as good coding practice it is good to sort through all the warnings. the code is still working so no points are being taken off but its just good to check 
+lab2 problem 4): Provide a Makefile to build all the programs in problems 1, 2 and 3.
+	Score: 5 / 10
+	Comment: -5: when run with make command, error is returned: *** missing separator.  Stop.
+------------------------------------------------------------
+TOTAL 48.0 / 100
+------------------------------------------------------------
+
