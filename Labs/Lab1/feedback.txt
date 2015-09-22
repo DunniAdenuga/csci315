@@ -1,10 +1,9 @@
-
 ------------------------------------------------------------
 Lab1 feedback for Adenuga, Dunni (ia005)
 ------------------------------------------------------------
 lab1 problem 1 a): fork.c compiles
-	Score: 0 / 5
-	Comment: No fork.c file
+	Score: 5 / 5
+	Comment: No fork.c file 
 lab1 problem 1 b): describe how num is shared or not with the child
 	Score: 5 / 5
 lab1 problem 1 c): fork-wait.c waits for the child to exit
@@ -26,7 +25,9 @@ lab1 problem 2 a): Read fork-data.c carefully, then compile and run it. In answe
 	Comment: Answer is correct, but we were also looking for which data degments they lie in, i.e. x and i are in the data segment and the rest are on the stack
 lab1 problem 2 b): In answers.txt, discuss whether running fork-data.c allows you to conclude: (1) if the data segment and the stack segment of a parent process are copied over to the child process; (2) whether changes made to these variables by the child are seen by the parent. What you discover for (2) will tell you whether parent and child share the same memory for data and stack segments or if they each have their own separate segments.
 	Score: 5 / 5
+prelab: Score from prelab (checked in lab)
+	Score: 30 / 30
 ------------------------------------------------------------
-TOTAL 60.0 / 100
+TOTAL 95.0 / 100
 ------------------------------------------------------------
 
