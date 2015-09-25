@@ -10,7 +10,11 @@ lab2 problem 2): Two pipes parent writes, child reads uppercases and writes back
 lab2 problem 4): Provide a Makefile to build all the programs in problems 1, 2 and 3.
 	Score: 5 / 10
 	Comment: -5: when run with make command, error is returned: *** missing separator.  Stop.
+prelab: Score from prelab (checked in lab)
+	Score: 30 / 30
+lab2 problem 3): Parent sends lines to child, child tokenizes and returns a string containing the tokens.
+	Score: 15 / 15
 ------------------------------------------------------------
-TOTAL 48.0 / 100
+TOTAL 93.0 / 100
 ------------------------------------------------------------
 
