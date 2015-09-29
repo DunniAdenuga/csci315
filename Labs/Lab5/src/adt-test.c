@@ -23,10 +23,12 @@ int main(){
   }
 
   circular_list_remove(&l, &num);
+  printf("Number removed %f\n", num);
   printf("After removing :\n");
    int y = 0;
   while(y < l.elems){
     printf("%f\n", l.buffer[y]);fflush(stdout);
    y++;
    }
+  
 }
