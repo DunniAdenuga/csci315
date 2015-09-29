@@ -1,0 +1,43 @@
+------------------------------------------------------------
+Lab3 feedback for Adenuga, Dunni (ia005)
+------------------------------------------------------------
+prelab1: In your pre-lab.txt file jot down your observations regarding the following:
+
+  1. Do the threads order of execution match the order in which they were created?
+  2. Looking at the characters that a printed to the standard output, do the threads always follow the same order of execution? That is, we want to know whether if you always see thread 1, then thread 2, then thread 3, etc., repeating in a predictable order
+	Score: 19 / 20
+	Comment: -1: first answer could be more clear, when you say they run concurrently, what does that mean for the order of execution? - they run in a random order
+
+prelab2: Write a program called mytime.c, which calls gettimeofday(2), passes the
+results to ctime(3), and then prints to the screen the resulting string.
+Whether you have used these functions before or not, take the time to read
+their man pages to understand what they do and how to use them.
+	Score: 10 / 10
+lab3 problem 1): Correct Makefile to build all three programs.
+	Score: 7 / 10
+	Comment: -3: issue making 'summation'
+
+lab3 problem 2): * [3 points] Problem 2.1 – In answers.txt: undefined symbols in summation.c
+  * [4 points] Problem 2.2 - In answers.txt: linker flag to use the math library
+  * [3 points] Problem 2.3 - In answers.txt: any remaining undefined symbols?
+	Score: 10 / 10
+lab3 problem 3): * [3 points: Problem 3.1 - In answers.txt: passing arguments to threads
+  * [3 points]: Problem 3.2 – In answers.txt: how calloc may be better than malloc
+  * [2 points]: Problem 3.3 – In answers.txt: thread detached state
+  * [3 points]: Problem 3.4 – In answers.txt: thread synchronization and returning results
+  * [3 points]: Problem 3.5 – In answers.txt: what happens when one thread calls exit
+  * [3 points]: Problem 3.6 – In answers.txt: what happens when one thread calls execl
+	Score: 20 / 20
+	Comment: 3.2 - calloc also initializes the memory to 0 for you 
+
+lab3 problem 4): * [10 points]: Problem 4.1 – Returns time for execution of summation (gettimeofday)
+  * [5 points]: Problem 4.2 – Correct subtraction of time values
+	Score: 15 / 15
+lab3 problem 5): * [8 points]: Problem 5.1 – Each thread computes it run time and prints end time with ctime
+  * [4 points]: Problem 5.2 – In answers.txt: is the end time printed reliable?
+  * [3 points]: Problem 5.3 – In answers.txt: what causes problems with ctime and how to avoid it
+	Score: 15 / 15
+------------------------------------------------------------
+TOTAL 96.0 / 100
+------------------------------------------------------------
+
