@@ -1,0 +1,131 @@
+/*
+ * CSCI 315 Operating Systems Design
+ * Author: L. Felipe Perrone
+ * Date: 2014-09-21
+ * Copyright (c) 2014 Bucknell University
+ *
+ * Permission is hereby granted, free of charge, to any individual
+ * or institution obtaining a copy of this software and associated
+ * documentation files (the "Software"), to use, copy, modify, and
+ * distribute without restriction, provided that this copyright
+ * and permission notice is maintained, intact, in all copies and
+ * supporting documentation.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL BUCKNELL UNIVERSITY BE LIABLE FOR ANY CLAIM, DAMAGES
+ * OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+ * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+#include "wrappers.h"
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+#define BUFFER_SIZE 512
+#define TRUE 1
+#define FALSE 0
+
+/*------------------------------------------------------------------------
+ * Program:   echoreq
+ *
+ * Purpose:  allocate a socket, connect to a server, transfer requested
+ *            file to local host, and print file contents to stdout
+ *
+ * Usage:    echoreq [ host ] [ port ] [ string ] 
+ *
+ *		 host  - name of a computer on which server is executing
+ *		 port  - protocol port number server is using
+ *     string - a string in double quotes
+ *     
+ *------------------------------------------------------------------------
+ */
+
+int main(int argc, char* argv[]) {
+
+	struct	hostent	 *ptrh;	 // pointer to a host table entry	
+	struct	sockaddr_in sad; // structure to hold an IP address	
+
+	int	sd;		                 // socket descriptor			
+	int	port;		               // protocol port number		
+	char *host;                // pointer to host name		
+	char in_msg[BUFFER_SIZE]; // buffer for incoming message
+	char out_msg[BUFFER_SIZE];
+
+	int ret_val;
+	const char *node;
+	const char *service;
+	  struct addrinfo hints;
+	  struct addrinfo *res, *p;
+	  memset((void *)&hints,0,sizeof(hints)); // zero out sockaddr structure	
+	hints.ai_family = AF_INET;	          // set family to Internet	
+	hints.ai_socktype = SOCK_STREAM;
+	hints.ai_flags = AI_PASSIVE;
+	// verify usage
+
+	if (argc < 4) {
+		printf("Usage: %s [ host ] [ port ] [ string ]\n", argv[0]);
+		exit(-1);
+	}
+
+	node  = argv[1];		
+	service = argv[2];
+	strcpy(in_msg, argv[3]);
+	//printf("%s\n", in_msg);
+	/**if (port > 0)	
+		// test for legal value		
+		sad.sin_port = htons((u_short)port);
+	else {				
+		// print error message and exit	
+		printf("ECHOREQ: bad port number %s\n", argv[2]);
+		exit(-1);**/
+	
+
+	// convert host name to equivalent IP address and copy to sad 
+
+          /**ptrh = gethostbyname(host);
+
+	if ( ((char *)ptrh) == NULL ) {
+		printf("ECHOREQ: invalid host: %s\n", host);
+		exit(-1);
+		}**/
+      getaddrinfo(node, service, &hints, &res);
+//memcpy(&sad.sin_addr, ptrh->h_addr, ptrh->h_length);
+      p = res;
+	// create socket 
+	
+	sd = Socket(p->ai_family, p->ai_socktype, p->ai_protocol);
+
+	// connect the socket to the specified server 
+	
+	Connect(sd, p->ai_addr, (socklen_t)p->ai_addrlen);
+
+	// send message to server
+	
+	int size;
+    
+	size = strlen(in_msg) + 1;
+    
+	Write(sd, (void*) &size, 4);
+	//printf("%s\n", in_msg);
+	Write(sd,  in_msg,  size);
+
+	// receive message echoed back by server
+	Read(sd, &size, 4);
+	Read(sd, out_msg, size);
+	printf("ECHOREQ: from server = %s\n", out_msg);
+
+	// close the socket   
+	Close(sd);
+
+	// terminate the client program gracefully 
+	return(0);
+}

@@ -1,0 +1,16 @@
+1. Two different processes aree communicating. They're reading and writing to each other without resorting to shared variables. A communication link is also established using sockets. fork() is not the only system call for IPC.
+
+2.socket() is a functionality provided by the kernel. First clue is that it's located in the System Calls section of the linux manual.
+It would make more sense to make it a kernel functionality since more advanced priviledges and hardware resources are needed for network connections. It wouldbe better to make a system call than have to be a library function and have to change to kernel mode every time.
+
+3. i. Capacity- buffer holds enough bytes before other process receives.
+ii Synchronization-Message gets sent and received in correct order .
+ii.Directionality- bidirectional quality. We can send, receive on one side and on the other.
+iv. Reliability- Anything sent gets received.
+
+4. gethostbyname() returns a structure of type hostent for the given host name. It performs a lookup on the given host name. It gives information like the official name of host, alias list, host address type and length of address for an host name. 
+
+5. getaddrinfo() would be used.
+It stores the lookup information into structs specifiedin its argument.
+It returns more information.
+No dependency on IPv4 orIPV6.
