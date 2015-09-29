@@ -1,0 +1,14 @@
+1. A mutex is a lock that can either be available(1) or unavailable(0). It's usually over a shared resource. A semaphore can either be a counting semaphore , where it's more than 1 or it can be a binary semaphore where it acts like a mutex. A counting semaphore can represent the value of filled or empty spaces in a shared resource.
+
+2)
+pthread_mutex_init() creates a mutex with specified attributes. It takes 2 arguments: 1: the mutex and 2: the attributes. Upon initialization, a mutex is set to unlocked.
+pthread_mutex_lock() locks the referenced mutex.If it's already locked, the calling thread is blocked until the mutex becomes available.
+
+pthread_mutex_unlock ()  release the mutex object referenced by mutex. If there are threads blocked  on  the mutex object referenced by mutex when pthread_mutex_unlock() is called, resulting in the mutex becoming available, the scheduling policy  shall determine which thread shall acquire the mutex.
+
+sem_init(3) initializes an unnamed semaphore at the address contained in the specified pointer. It initializes the semaphore with specified atrributes such as whether the semaphore should be shared and an initial value.
+
+sem_wait(3) decrements (locks) the semaphore pointed to.  If the semaphore’s value is greater than zero, then  it is decreased ,and  the function returns, immediately.  If the semaphore currently has the value zero, then the call blocks until either it  becomes  possible to  perform the decrement (i.e., the semaphore value rises above zero),or a signal handler interrupts the call.
+
+sem_post(3) increments  (unlocks)  the semaphore pointed to.  If the semaphore’s value consequently  becomes  greater  than  zero,  then another  process  or thread blocked in a sem_wait(3) call will be woken up and proceed to lock the semaphore.
+
