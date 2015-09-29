@@ -43,27 +43,39 @@ int circular_list_insert(struct circular_list *l, item i) {
 }
 
 int circular_list_remove(struct circular_list *l, item *i) {
-  int x = 0;
+  //int x = 0;
   int check = 0;
-  int y;
-  while((x < l->elems)&& (check == 0)){
+  int y = 0;
+  /**while((x < l->elems)&& (check == 0)){
     if(l->buffer[x] == *i){
       y = x;
       
-      check = 1;
+      check = 1;**/
+  i = &(l->buffer[l->start]);
       while (y < l->elems){
+	  
       l->buffer[y] = l->buffer[y+1];
       y++;
       }
-l->end--;
+l->start++;
  l->elems--;
-     }
-    x++;
-      if(check == 1){
-	l->buffer[l->elems] = 0;}
+    
+      
+	l->buffer[l->elems] = 0;
       
  
-}
-  return 0;
-}
 
+  return 0;
+  }
+
+/**int circular_list_remove(struct circular_list *l, item *i){
+  int x =0;
+  i  = calloc(l->elems, sizeof(item));
+  while(x < l->elems){
+    i[l->start] = l->buffer[x];
+    printf("%f\n", i[l->start]);
+    l->start++;
+    l->buffer[x] = 0;
+    x++;
+    l->elems--;
+    }}**/

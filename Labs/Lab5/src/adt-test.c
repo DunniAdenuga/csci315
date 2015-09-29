@@ -6,7 +6,7 @@
 int main(){
   struct circular_list l;
   item i;
-  item num = 2;
+  item num ;
   circular_list_create(&l, 10);
   double m = 0;
 
@@ -23,7 +23,7 @@ int main(){
   }
 
   circular_list_remove(&l, &num);
-  printf("After removing 2:\n");
+  printf("After removing :\n");
    int y = 0;
   while(y < l.elems){
     printf("%f\n", l.buffer[y]);fflush(stdout);
