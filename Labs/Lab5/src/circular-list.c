@@ -57,11 +57,12 @@ int circular_list_remove(struct circular_list *l, item *i) {
       l->buffer[y] = l->buffer[y+1];
       y++;
       }
+l->buffer[l->elems] = 0;
 l->start++;
  l->elems--;
     
       
-	l->buffer[l->elems] = 0;
+
       
  
 
