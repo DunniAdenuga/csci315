@@ -29,7 +29,7 @@ void *letters(void *stuff)
   printf("I'm in thread: %d\n", m);
   char alpha[26] = {'a', 'b', 'c', 'd','e', 'f', 'g', 'h', 'i', 'j','k','l','m', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
   while(1)
-    {
+     {
   int i = 0;
   while(i < 26)
     {
@@ -72,3 +72,4 @@ int main(){
 
 }
 
+ 

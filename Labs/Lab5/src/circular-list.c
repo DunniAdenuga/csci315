@@ -29,8 +29,7 @@ pthread_mutex_t lock;
 
 int circular_list_create(struct circular_list *l, int size) {
   l->buffer = calloc(size, sizeof(item));
-  sem_init(&empty, 0, size);
-  sem_init(&full, 0, 0);
+  
   l->start = -1;
   l->end = -1;
   l->elems = 0;
@@ -40,7 +39,7 @@ int circular_list_create(struct circular_list *l, int size) {
 }
 
 int circular_list_insert(struct circular_list *l, item i) {
-  sem_wait(&empty);
+  
   pthread_mutex_lock(&lock);
   if(l->elems == 0){
     l->start ++;
@@ -49,14 +48,12 @@ int circular_list_insert(struct circular_list *l, item i) {
   l->buffer[l->end] = i;
   l->elems++;
   pthread_mutex_unlock(&lock);
-  sem_post(&full);
+ 
   return 0;
 }
 
 int circular_list_remove(struct circular_list *l, item *i) {
   
- 
-  sem_wait(&full);
   pthread_mutex_lock(&lock);
    
    //printf("lstart %d ", l->start);
@@ -71,7 +68,7 @@ int circular_list_remove(struct circular_list *l, item *i) {
    //l->start++;
 l->elems--;
  pthread_mutex_unlock(&lock);
- sem_post(&empty);
+ 
   return 0;
   }
 

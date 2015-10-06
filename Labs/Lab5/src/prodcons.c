@@ -22,7 +22,7 @@
 #include <stdbool.h> 
 #include <unistd.h>
 #include<pthread.h>
-
+#include<semaphore.h>
 #include "circular-list.h" 
 
 /* SCALE_FACTOR is a constant for you to experiment with:
@@ -44,6 +44,8 @@
 
 struct circular_list mylist;
 pthread_mutex_t lock;
+sem_t empty;
+sem_t full;
 // end of global variables ----------------
 
 void *producer (void *param) {
@@ -51,7 +53,7 @@ void *producer (void *param) {
   unsigned int seed = 1234;
   int id = (int)param;
   seed =  seed * (id+7);
-  // while (true) {
+  //while (true) {
     // sleep for random period of time
   int sleeptime;
   sleeptime = (SCALE_FACTOR * rand_r(&seed)) / (RAND_MAX/1000);
@@ -62,13 +64,14 @@ void *producer (void *param) {
     
     // generate a random number
     i = (item) (((double) rand_r(&seed))*(id +2 ) / RAND_MAX);
-
+    sem_wait(&empty);
     if (circular_list_insert(&mylist, i) == -1) {
       printf("PRODUCER: error condition\n");
     } else {
       printf("PRODUCER: produced value %lf\n", i);
     }
-    // }
+     sem_post(&full);
+     //}
     pthread_exit(0);
 }
 
@@ -86,15 +89,14 @@ void *consumer (void *param) {
     sleeptime = sleeptime * -1;}
   printf("sleeptime-cons is: %d\n", sleeptime);
    usleep(sleeptime);
-   
-   //pthread_mutex_lock(&lock);
+   sem_wait(&full);
     if (circular_list_remove(&mylist, &i) == -1) {
       printf("CONSUMER: error condition\n");
     } else {
       printf("CONSUMER : consumed value %lf\n",  i);
     }
-    //pthread_mutex_unlock(&lock);
-    //}
+   sem_post(&empty);
+   //}
     pthread_exit(0);
 }
 
@@ -102,7 +104,6 @@ int main (int argc, char *argv[]) {
   int num_prod;
   int num_cons;
   int sleep_time;
-  pthread_mutex_init(&lock, NULL);
   
   // if error in command line argument usage, terminate with helpful
   if(argc != 4){
@@ -120,6 +121,8 @@ int main (int argc, char *argv[]) {
   // initialize buffer
   circular_list_create(&mylist, 20);
   
+  sem_init(&empty, 0, mylist.size);
+  sem_init(&full, 0, 0);
   // create producer thread(s)
   for(int i = 0; i < num_prod; i++){
     pthread_create(&prod[i], NULL, producer, (void*)i);
