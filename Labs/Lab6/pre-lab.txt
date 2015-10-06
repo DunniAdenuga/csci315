@@ -1,0 +1,11 @@
+b) sendTo transmits a message to another socket. Its structure/prototype is :
+ssize_t sendto(int sockfd, const void *buf, size_t len, int flags, const struct sockaddr *dest_addr, socklen_t addrlen);
+The message to be transmitted in stored in buf and has length len.
+
+recvfrom receives messages from a socket whether or not the socket is connection-oriented. Its structure/prototype is :
+ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags, struct sockaddr *src_addr, socklen_t *addrlen);
+
+c)TCP is built on a client-server model. read() and write() calls(send() and recv()) are used for TCP connections while sendTo and recvfrom are used for UDPs. UDP is not as reliable as TCP. UDP is characterized by length, TCP is characterised by byte-sream protocol.The length of a datagram in UDP is passed to the receiving application along with the data. In UDP there is no need to use the accept(), listen() functions but they're necessary in the server side of the TCP. In UDP no need for the connect() function unlike in the client side of the TCP.
+
+Sources: http://www.cs.dartmouth.edu/~campbell/cs60/socketprogramming.html
+	 http://beej.us/guide/bgnet/output/html/singlepage/bgnet.html#sendtorecv
