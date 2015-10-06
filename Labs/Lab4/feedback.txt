@@ -7,9 +7,7 @@ files should include wrappers for the following functions: fork(2), pipe(2),
 wait(2), waitpid(2), open(2), close(2), write(2), read(2), connect(2),
 bind(2), listen(2), accept(2), and any others you use in this lab which set
 the errno variable when encountering an error condition.
-	Score: 0 / 10
-	Comment: wrappers.h and wrappers.c files not found 
-
+	Score: 10 / 10
 prelab: (P1) Read the manual page for the socket(2) call. Compare this call to pipe(2)
 and open(2); explain the similarities and the differences you observe. (5
 points)
@@ -23,7 +21,11 @@ points)
   5. Explain the purpose of the accept(2) call. (4 points)
   6. One of your tasks in lab will be to implement message exchanges between echoreq and echod over a TCP socket. Do a little reading to discover what system calls you will need to use. Explain how you will be able to send and to receive messages. (5 points)
 	Score: 30 / 30
+Problem 2: You will need to turn in a Makefile that generates all the objects and the
+executables for this lab assignment. (This includes a rule for building
+wrappers.o!)
+	Score: 5 / 5
 ------------------------------------------------------------
-TOTAL 30.0 / 100
+TOTAL 45.0 / 100
 ------------------------------------------------------------
 
