@@ -40,10 +40,10 @@ $(OBJ)/circular-list.o: $(INC)/circular-list.h $(SRC)/circular-list.c
 	$(CC) $(CFLAGS) -c $(SRC)/circular-list.c -o $(OBJ)/circular-list.o
 
 prodcons: $(OBJ)/circular-list.o
-	$(CC) $(CFLAGS) $(SRC)/prodcons.c $(OBJ)/circular-list.o -o $(BIN)/prodcons -lpthread
+	$(CC) $(CFLAGS) $(SRC)/prodcons.c $(OBJ)/circular-list.o -o $(BIN)/prodcons -lpthread 
 
 adt-test: $(OBJ)/circular-list.o
-	$(CC) $(CFLAGS) $(SRC)/adt-test.c $(OBJ)/circular-list.o -o $(BIN)/adt-test 
+	$(CC) $(CFLAGS) $(SRC)/adt-test.c $(OBJ)/circular-list.o -o $(BIN)/adt-test -lpthread 
 
 .PHONY: clean
 clean:

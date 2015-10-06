@@ -20,52 +20,58 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "circular-list.h" 
+#include <pthread.h>
+#include <semaphore.h>
+
+sem_t empty;
+sem_t full ;
+pthread_mutex_t lock;
 
 int circular_list_create(struct circular_list *l, int size) {
   l->buffer = calloc(size, sizeof(item));
+  sem_init(&empty, 0, size);
+  sem_init(&full, 0, 0);
   l->start = -1;
   l->end = -1;
   l->elems = 0;
   l->size = size;
+  pthread_mutex_init(&lock, NULL);
   return 0;
 }
 
 int circular_list_insert(struct circular_list *l, item i) {
+  sem_wait(&empty);
+  pthread_mutex_lock(&lock);
   if(l->elems == 0){
     l->start ++;
-    //printf("here\n");fflush(stdout);
   }
   l->end++;
   l->buffer[l->end] = i;
-  //printf("%f\n", l->buffer[l->end]);fflush(stdout);
   l->elems++;
+  pthread_mutex_unlock(&lock);
+  sem_post(&full);
   return 0;
 }
 
 int circular_list_remove(struct circular_list *l, item *i) {
-  //int x = 0;
-  int check = 0;
+  
+ 
+  sem_wait(&full);
+  pthread_mutex_lock(&lock);
+   
+   //printf("lstart %d ", l->start);
+  *i = (l->buffer[l->start]);
+  //printf("*i %f", *i);
   int y = 0;
-  /**while((x < l->elems)&& (check == 0)){
-    if(l->buffer[x] == *i){
-      y = x;
-      
-      check = 1;**/
-  i = &(l->buffer[l->start]);
-      while (y < l->elems){
-	  
+   while ((y+1) < l->elems){  //shift everything to left
       l->buffer[y] = l->buffer[y+1];
       y++;
       }
-l->buffer[l->elems] = 0;
-l->start++;
- l->elems--;
-    
-      
-
-      
- 
-
+  //l->buffer[l->elems] = 0;
+   //l->start++;
+l->elems--;
+ pthread_mutex_unlock(&lock);
+ sem_post(&empty);
   return 0;
   }
 
