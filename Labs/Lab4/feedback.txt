@@ -28,7 +28,18 @@ wrappers.o!)
 Problem 3: 5 pts for using system call wrappers; 15 pts for correct communication between
 echod and echoreq; 5 pts for correct code to clean up blank spaces.
 	Score: 25 / 25
+Problem 4: 1. If no calls were made to fork in either of the programs you have, why is it that we’re claiming that TCP sockets are a mechanism for interprocess communication?
+  2. Is the socket functionality provided by the kernel or by an external library? Present an argument to justify your answer from the perspectives of the actual implementation on Linux and from the perspective of the design decisions made for the construction of the operating system (think about the implications of these decisions on the performance of a modern networked computer). You should think about what makes sense, do a little research to verify whether you are on the right track, reason about your findings, and only then write your conclusions.
+  3. Only when you consider a program’s communications needs and the operational constraints around a program can you choose which of the two IPC mechanisms is most appropriate. Describe what drives you decision to use either pipes and sockets to interconnect two processes.
+  4. echoreq makes a call to gethostbyname(3). Explain what this library call does for your program and how you use its API.
+  5. gethostbyname(3) is not the most up-to-date function for its kind of task (it is deprecated). Discover what function might eventually replace gethostbyname(3) and explain how differently it might work.
+	Score: 20 / 20
+Problem 5: Copy the echoreq.c file to a new file called echoreq2.c. Once you have
+discovered a modern alternative to gethostbyname(3), modify echoreq2.c so that
+it uses this new version. Otherwise, the behavior echoreq2.c should be
+identical to what you see in your solution to Problem 3.
+	Score: 10 / 10
 ------------------------------------------------------------
-TOTAL 70.0 / 100
+TOTAL 100.0 / 100
 ------------------------------------------------------------
 
