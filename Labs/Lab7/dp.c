@@ -2,17 +2,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#define NUM 256
+#define NUM 1000000
 
 void * Philosopher(void * param);
 void napping(int t);
 
 void napping(int t){
-  unsigned int seedp = 10;
+  unsigned int seedp = (unsigned int)pthread_self();
+
   int n = rand_r(&seedp)%t;
-  sleep(n);
+  usleep(n*1000000);
 }
 void* Philosopher(void* param){
+  while(1){
   long long id = (long long)param;
   printf("Philosopher ID -%lli is thinking.\n", id);
   napping(2);
@@ -20,6 +22,7 @@ void* Philosopher(void* param){
   printf("Philosopher ID -%lli is starting to eat.\n", id);
   napping(1);
   printf("Philosopher ID -%lli is done eating.\n", id);
+  }
 }
 
 int main(){
