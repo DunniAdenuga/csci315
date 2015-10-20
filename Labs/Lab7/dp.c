@@ -8,7 +8,7 @@ void * Philosopher(void * param);
 void napping(int t);
 
 void napping(int t){
-  unsigned int seedp = (unsigned int)pthread_self();
+  unsigned int seedp = (unsigned int)pthread_self() + 1;
 
   int n = rand_r(&seedp)%t;
   usleep(n*1000000);
