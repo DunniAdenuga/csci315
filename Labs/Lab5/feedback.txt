@@ -1,0 +1,14 @@
+------------------------------------------------------------
+Lab5 feedback for Adenuga, Dunni (ia005)
+------------------------------------------------------------
+perlab1: In circular-list.c, flesh out the implementation of the functions for
+insertion and removal in the ADT. Create program src/adt-test.c, where you
+will write tests to call all the three functions in the ADT. The goal of this
+program is to exercise your implementation so that you can discover any bugs
+and, subsequently, correct them. Modify the Makefile given to you so that it
+compiles src/adt-test.c and places the executable in directory bin/.
+	Score: 20 / 20
+------------------------------------------------------------
+TOTAL 20.0 / 100
+------------------------------------------------------------
+
