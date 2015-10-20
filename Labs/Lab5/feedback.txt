@@ -31,7 +31,11 @@ provided as in the example below. If the user tries to invoke your program
 without these three parameters, your program should: (a) display a help
 message indicating the correct usage (hint: use the structure in the example
 below) and (b) exit with (-1) termination status.
+	Score: 20 / 20
+problem 4: Circular_list_insert and circular_list_remove functions have the required
+synchronization.
+	Score: 30 / 30
 ------------------------------------------------------------
-TOTAL 50.0 / 100
+TOTAL 100.0 / 100
 ------------------------------------------------------------
 
