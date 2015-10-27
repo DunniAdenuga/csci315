@@ -1,0 +1,144 @@
+ia005@brki167-lnx-4 Lab6]$ ./fileserver 9635
+SERVER: stats requestedSERVER: file requested is getfile.c
+SERVER: file getfile.c found
+SERVER: stats requestedSERVER: file requested is getstats.c
+SERVER: file getstats.c found
+SERVER: stats requestedSERVER: file requested is fileserver.c
+SERVER: file fileserver.c found
+
+[ia005@brki167-lnx-4 Lab6]$ ./getstats localhost 9635
+Number of file requests: 0 time(s).
+Number of status requests: 1 time(s).
+Number of file errors: 0 time(s).
+Average length of file requests: 0.
+Server has been contacted 1 time(s).
+[ia005@brki167-lnx-4 Lab6]$ ./getstats localhost 9635
+Number of file requests: 1 time(s).
+Number of status requests: 2 time(s).
+Number of file errors: 0 time(s).
+Average length of file requests: 3234.
+Server has been contacted 3 time(s).
+[ia005@brki167-lnx-4 Lab6]$ ./getstats localhost 9635
+Number of file requests: 2 time(s).
+Number of status requests: 3 time(s).
+Number of file errors: 0 time(s).
+Average length of file requests: 3095.
+Server has been contacted 5 time(s).
+[ia005@brki167-lnx-4 Lab6]$ ./getstats localhost 9635
+Number of file requests: 3 time(s).
+Number of status requests: 4 time(s).
+Number of file errors: 0 time(s).
+Average length of file requests: 2903.
+Server has been contacted 7 time(s).
+
+
+[ia005@brki167-lnx-4 Lab6]$ ./getfile localhost 9635 getfile.c
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <unistd.h>
+#include <netdb.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include "readwrite.h"
+#include "wrappers.h"
+
+/*------------------------------------------------------------------------
+ * Program:   getfile 
+ *
+ * Purpose:   allocate a socket, connect to a server, transfer requested
+ *            file to local host, and print file contents to stdout
+ *
+ * Syntax:    getfile [ host ] [ port ] [ file ] 
+ *
+ *		 host  - name of a computer on which server is executing
+ *		 port  - protocol port number server is using
+ *               file  - complete path of file to retrieve
+ *
+ *------------------------------------------------------------------------
+ */
+
+#define BUFSIZE 1000
+#define NAMELEN 257
+
+int main(int argc, char* argv[]) {
+
+  struct	sockaddr_in sad; // structure to hold an IP address	
+  struct addrinfo hint;
+  struct addrinfo *serverptr;
+[ia005@brki167-lnx-4 Lab6]$ ./getfile localhost 9635 getstats.c
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <netdb.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+/*------------------------------------------------------------------------
+ * Program:   getstats 
+ *
+ * Purpose:   allocate a socket, connect to a server, 
+ *            request file transfer statistics
+ *
+ * Syntax:    getstats [ host ] [ port ]
+ *
+ *		 host  - name of a computer on which server is executing
+ *		 port  - protocol port number server is using
+ *
+ *------------------------------------------------------------------------
+ */
+
+#define BUFSIZE 1000
+#define NAMELEN 257
+
+int main(int argc, char* argv[]) {
+
+  struct	hostent	 *ptrh;	 // pointer to a host table entry	
+  struct	sockaddr_in sad; // structure to hold an IP address	
+
+  struct addrinfo hint;
+  struct addrinfo *serverptr;
+
+  int	sd;		           // socket descriptor			
+  int	port;		         // protocol port number		
+  char	*host;		     // pointer t
+[ia005@brki167-lnx-4 Lab6]$ ./getfile localhost 9635 fileserver.c
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include "readwrite.h" 
+#include "wrappers.h"
+#include <pthread.h>
+
+#define MAX_FILE_PATH   257 // length of path+filename and null char  
+#define BUFFER_SIZE     512 // size of file read buffer    
+#define	QLEN		6   // size of request queue
+int	visits	    =   0;  // counts client connections
+int fileR = 0;
+int statR = 0;
+int fileErr = 0;
+int avg = 0;
+pthread_t pid[10];
+pthread_mutex_t lock1;
+pthread_mutex_t lock2;
+pthread_mutex_t lock3;
+pthread_mutex_t lock4;
+/*------------------------------------------------------------------------
+ * Program:   fileserver
+ *
+ * Purpose:   allocate a socket and then repeatedly execute the following:
+ *		(1) wait for the next connection from a client
+ *		(2) send a short message to the client
+ *		(3) close the connection
+ *		(4) go back to step 
