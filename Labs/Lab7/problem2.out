@@ -1,0 +1,17 @@
+[ia005@olin357-02 Lab7]$ ./problem2
+Philosopher ID -0 is thinking.
+Philosopher ID -1 is thinking.
+Philosopher ID -4 is thinking.
+Philosopher ID -3 is thinking.
+Philosopher ID -2 is thinking.
+Philosopher ID -1 is hungry.
+Philosopher ID -1 picking up chopstick 1
+Philosopher ID -4 is hungry.
+Philosopher ID -4 picking up chopstick 4
+Philosopher ID -2 is hungry.
+Philosopher ID -2 picking up chopstick 2
+Philosopher ID -3 is hungry.
+Philosopher ID -3 picking up chopstick 3
+Philosopher ID -0 is hungry.
+Philosopher ID -0 picking up chopstick 0
+[ia005@olin357-02 Lab7]$ 

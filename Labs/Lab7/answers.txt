@@ -1,0 +1,8 @@
+1.1 Yes. Philosopher ID - 0, 2 and 3 never eat. Only 1 and 4, adjacent philosophers eat.
+They are starved. Starvation occured in the system.
+
+1.2 Due to Mutual Exclusion if a thread with its left chopstick takes a while before accesing its right chopstick(hold and wait) and another thread accesses it first, deadlock would occur.
+
+2.1 Mutual Exclusion. Every thread had mutual exclusion to a chopstick, also  exhibited the hold and wait condition through napping() for deadlock so,  they each couldn't access the right chopstick.
+
+3.1 These solutions do not eliminate all the potential causes of deadlock. While it temporarily reduces the hold and wait time, other causes of deadlock are present such as circular wait, mutual exclusion, and the no pre-emption rule of mutex  locks fuctions (wait & signal).
