@@ -1,0 +1,117 @@
+[ia005@brki167-lnx-4 Lab6]$ ./ufileserver 9856
+SERVER: stats requested
+SERVER: file requested is fileserver.c
+SERVER: file fileserver.c found
+SERVER: file requested is getstats.c
+SERVER: file getstats.c found
+[ia005@brki167-lnx-4 Lab6]$ ./ufileserver 9758
+SERVER: stats requested
+SERVER: file requested is ugetfile.c
+SERVER: file ugetfile.c found
+SERVER: stats requested
+
+ia005@brki167-lnx-4 Lab6]$ ./ugetstats localhost 9856
+Number of file requests: 0 time(s).
+Number of status requests: 1 time(s).
+Number of file errors: 0 time(s).
+Average length of file requests: 0.
+Server has been contacted 1 time(s).
+[ia005@brki167-lnx-4 Lab6]$ ./ugetstats localhost 9856
+Number of file requests: 2 time(s).
+Number of status requests: 2 time(s).
+Number of file errors: 0 time(s).
+Average length of file requests: 4286 .
+Server has been contacted 4 time(s).
+[ia005@brki167-lnx-4 Lab6]$ ./ugetstats localhost 9758
+Number of file requests: 0 time(s).
+Number of status requests: 1 time(s).
+Number of file errors: 0 time(s).
+Average length of file requests: 0.
+Server has been contacted 1 time(s).
+[ia005@brki167-lnx-4 Lab6]$ ./ugetstats localhost 9758
+Number of file requests: 1 time(s).
+Number of status requests: 2 time(s).
+Number of file errors: 0 time(s).
+Average length of file requests: 2965.
+Server has been contacted 3 time(s).
+
+
+[ia005@brki167-lnx-4 Lab6]$ ./ugetfile localhost 9856 fileserver.c
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include "readwrite.h" 
+#include "wrappers.h"
+#include <pthread.h>
+
+#define MAX_FILE_PATH   257 // length of path+filename and null char  
+#define BUFFER_SIZE     512 // size of file read buffer    
+#define	QLEN		6   // size of request queue
+int	visits	    =   0;  // counts client connections
+int file[ia005@brki167-lnx-4 Lab6]$ ./ugetfile localhost 9856 fileserver.c
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include "readwrite.h" 
+#include "wrappers.h"
+#include <pthread.h>
+
+#define MAX_FILE_PATH   257 // length of path+filename and null char  
+#define BUFFER_SIZE     512 // size of file read buffer    
+#define	QLEN		6   // size of request queue
+int	visits	    =   0;  // counts client connections
+int file
+ia005@brki167-lnx-4 Lab6]$ ./ugetfile localhost 9856 getstats.c
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <netdb.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+/*------------------------------------------------------------------------
+ * Program:   getstats 
+ *
+ * Purpose:   allocate a socket, connect to a server, 
+ *            request file transfer statistics
+ *
+ * Syntax:    getstats [ host ] [ port ]
+ *
+ *		 host  - name of a computer on which server is executing
+ *		 port  - protocol port 
+ia005@brki167-lnx-4 Lab6]$ ./ugetfile localhost 9758 ugetfile.c
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <inttypes.h>
+#include <arpa/inet.h>
+#include <unistd.h>
+#include <netdb.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include "readwrite.h"
+#include "wrappers.h"
+
+/*------------------------------------------------------------------------
+ * Program:   getfile 
+ *
+ * Purpose:   allocate a socket, connect to a server, transfer requested
+ *            file to local host, and print file contents to stdout
+ *
