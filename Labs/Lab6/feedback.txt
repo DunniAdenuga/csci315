@@ -13,7 +13,16 @@ problem2: 1. Adapt your Makefile so that it builds the executables that correspo
   2. Modify your multithreaded client/server to create a new implementation that uses UDP sockets instead of TCP sockets.
   3. When you are confident that you have debugged your code, create a text file called output2.txt with the record of a few sample runs of ugetfile and ugetstats for your threaded application. What you record in this file must be enough to demonstrate that your programs work correctly.
 	Score: 35 / 35
+problem1: 1. Modify getfile.c, fileserver.c, and getstats.c to use the wrapper functions with error checking that you have been building up over the semester.
+  2. Create a Makefile to build the executables corresponding to the three C files given to you.
+  3. Modify fileserver.c to start up a new concurrent thread for every request it receives. Note that you need to limit the maximum number of concurrent threads your spawn so that your server is not easy prey to denial of service attacks. (Choose a reasonable limit for your number of server threads.)
+  4. Augment the server in fileserver.c to respond to get status requests with the following information:
+    * number of file requests served
+    * number of status requests served
+    * number of file not found errors
+    * average length of files requested
+	Score: 35 / 35
 ------------------------------------------------------------
-TOTAL 65.0 / 100
+TOTAL 100.0 / 100
 ------------------------------------------------------------
 
