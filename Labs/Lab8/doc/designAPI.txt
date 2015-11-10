@@ -1,0 +1,22 @@
+I have 3 additional functions.
+
+/*
+It finds the smallest space available that is bigger than the required size
+->iterate through free-list
+->find required node
+*/
+allocateBestFit(size);
+
+/*
+It finds the biggest space availablein free-list that is bigger than the required size
+->iterate through free-list
+->find required node
+*/
+allocateWorstFit(size);
+
+/*
+It finds the first space available that is bigger than the required size
+->iterate through free-list
+->find required node
+*/
+allocateFirstFit(size);

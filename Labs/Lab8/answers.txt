@@ -1,0 +1,28 @@
+1.In light of what you read about the operating system’s protection of the memory space of each process, describe what constitutes the segmentation fault error that you have been observing since you started programming in C. (4 points)
+A process is usually allocated a heap space for data through malloc(). 
+Segmentation fault is when a process tries to access memory space that has not been allocated to it.
+
+2. The operating system must keep track of which portions of memory have been “doled out” to a process (that is, IN USE)  and which portions are FREE. In this lab, you will implement a custom memory allocator, which will keep track of allocated and free memory chunks using doubly-linked lists. What are the positives and the negatives of using this data structure in this problem? (4 points)
+Positives
+i.Easy traversal.
+ii.Size not need to be fixed.
+Negatives
+i.No specific order.
+ii. Depend on pointers(whichis prone to errors) to access elements in the memory list.
+
+3. Reflect on how typical C programs that call malloc and free cause the operating system to work with its lists of allocated and free portions of memory. Argue whether doubly-linked lists are either efficient or perhaps the best data structures to use in your custom memory allocator. Propose at least one other data structure that might work as well or possibly better than doubly-linked lists for keeping track of allocated and free memory. (4 points)
+i. Doubly-linked lists are quite efficient. There's no restriction on the amount of nodes(i.e. number of times we can allocate,as long as space is still available). Easily traverse through the list to access available space.
+ii. Arrays 
+
+4. Define the term external fragmentation and describe a scenario where it occurs. (3 points)
+External fragmentation occurs when total memory space exists to satisfy a request, but it is not contiguous. For example, Process 5 needs 1000 bytes to operate but there are only small spaces of 200, 500, 300 bytes available in different parts of memory. There is no contiguous full block of 1000 bytes for Process 5 to access. 
+5.Define the term internal fragmentation and describe a scenario where it occurs. (3 points)
+Internal fragmentation is when allocated memory may be slightly larger than requested memory; this size difference is memory internal to a partition, but not being used. For example, Process 5 requires 1000 bytes and its allocated 1500 bytes. 500 bytes would not be used.
+
+6. Describe the first-fit allocation policy. Give one advantage and one disadvantage of its use. (4 points)
+This is when the first memory space that fits a request is allocated. Advantage: Fast. Disadvantage: More prone to internal fragmentation. 
+7.Describe the best-fit allocation policy. Give one advantage and one disadvantage of its use. (4 points)
+This is when the smallest memory space that fits(could accommodate) a request is allocated. Advantage: Efficient use of memory space. Internal fragmentation is minimal. Disadvantage: Waste time. Have to traverse whole list.
+
+8.Describe the worst-fit allocation policy. Give one advantage and one disadvantage of its use. (4 points)
+This is when the largest memory space that fits(could accommodate) a request is allocated. Advantage:Have access to larger contiguous space.  Disadvantage: Waste time. Have to traverse whole list. Internal fragmentation is great.
