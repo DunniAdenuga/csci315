@@ -1,0 +1,50 @@
+Seline Tan-Torres
+Dunni Adenuga
+
+1. a) 2 processes
+	b) flag[i] to TRUE in order to satisfy the progress condition in the Critical section problem. By saying that process i wants to go into the critical section, we are ensuring that if there are no other processes in the critical section, process i will enter. 
+
+c) Yes if one process is executing their critical section when the other wishes to do so, the second process will become blocked by the flag of the first process. 
+
+d) If both processes attempt to enter at the same time, the last process to execute "turn = j" will be blocked
+
+e) Yes, mutual exclusion was explained in c and d. For progress - each process can only be blocked at the while if the other process wants to use the critical section ( flag[ j ] = = true ), AND it is the other process's turn to use the critical section ( turn = = j ). If both of those conditions are true, then the other process ( j ) will be allowed to enter the critical section. The shared variable turn assures that only one process at a time can be blocked, and the flag variable allows one process to release the other when exiting their critical section.
+For bounded waiting, each process enters their entry section and they set the turn variable to be the other processes turn. Since no process ever sets it back to their own turn, this ensures that each process will have to let the other process go first at most one time before it becomes their turn again.
+
+2. a) No because it is not atomic in the sense of the test-and-set instruction.
+b) Code for test and set: 
+   int TestAndSet(int &var) {
+      int orig;
+      ATOMIC {
+1:      orig = var;
+2:      var = 1;
+      }
+      return orig;
+   }
+where "variable" is a variable being shared by two threads.  Here we are atomically setting the variable to 1 and returning its original value.  
+A shared lock variable has the value "1" if any thread is in a critical section.  It has the value 0 if no thread is in the critical section.
+
+int lock;
+Enter a critical section:
+while (TestAndSet(lock) == 1) {
+    // do nothing
+}
+Leave a critical section:
+lock = 0;
+The TestAndSet operation returns 0 only when the lock contains the value 0, meaning that no threads are executing a critical section.
+
+c) compare and swap compares an expected value to the concrete value of a variable, and if the concrete value of the variable is equals to the expected value, swaps the value of the variable for a new variable.
+Compare and swap code
+class MyLock {
+
+    private boolean locked = false;
+
+    public boolean lock() {
+        if(!locked) {
+            locked = true;
+            return true;
+        }
+        return false;
+    }
+}
+

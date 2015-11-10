@@ -1,0 +1,63 @@
+/**
+Initial thoughts
+
+producer - customers going in
+shared buffer - waiting room with capacity of n chairs
+consumer - barber in barber room(can only take 1 customer at once): read one byte at a time; 
+i. Nothing in buffer, sleep
+
+If the barber is busy
+but chairs are available, then the customer sits in one of the free chairs. ???
+
+Just wait in buffer as long as it's not full ?
+
+Looks like barber's room is a buffer too , barber is consumer ?
+
+Semaphore for customers going in; once in signal barber
+An access loock for waiting room
+Semaphore for moving to barber's room; if busy wait() customer
+**/
+
+/**
+Found this online
+
+Variables
+• Semaphore Customers = 0;
+• Semaphore Barber = 0;
+• Mutex accessSeats = 1;
+• int NumberOfFreeSeats = N;
+//total number of seats
+
+
+Barber and Customers
+Barber
+while(1) {
+P(Customers) //wait for C and sleep
+P(accessSeats) //mutex protect the number of
+available seats
+NumberOfFreeSeats++ //one chair gets free
+V(Barber) //Bring in a C for haircut
+V(accessSeats) //release the mutex on the
+chairs
+……. //here the B is cutting hair
+}//while(1)
+
+
+Customers
+while(1) {
+P(accessSeats) //mutex protect the number of
+available seats
+if ( NumberOfFreeSeats > 0 ) { //if any free
+seats
+NumberOfFreeSeats-- //sitting down on a
+chair
+V(Customers) //notify the B
+V(accessSeats) //release the lock
+P(Barber) //wait if the B is busy
+…. //here the C is having his hair cut
+} else { //there are no free seats
+V(accessSeats) //release the lock on the seats
+//C leaves without a haircut
+}
+}//while(1)
+**/
