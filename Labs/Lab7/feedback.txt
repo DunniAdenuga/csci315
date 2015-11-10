@@ -1,0 +1,44 @@
+------------------------------------------------------------
+Lab7 feedback for Adenuga, Dunni (ia005)
+------------------------------------------------------------
+Philosopher: Philosopher wakes up, calls napping with thread-safe random value, and prints
+status messages.
+	Score: 15 / 15
+Main: Main creates 5 Philosopher threads and passes the correct id to each thread
+[0..4]; Makefile created that builds dp executable.
+	Score: 15 / 15
+Problem 1a - Philosophers Eat: Run problem1 and you should observe that no two consecutive philosophers are
+eating at the same time.
+	Score: 18 / 20
+	Comment: -2: no two consecutive philosophers were eating at the same time, but only 1 and 4 were ever eating 
+
+Problem 1b - Philosophers Eat: Submitted a answers.txt file with answers to the following questions: (4
+points)
+
+  * Run your code for about 10 seconds. Do you observe any problems when your program runs? Report what you observe. (3 points)
+  * Based on your understanding of the code, how could deadlock possibly happen? (Hint: reason through all the four conditions to deadlock occurrence apply and explain if they all apply.) (3 points)
+	Score: 10 / 10
+Problem 2 - Napping: Copy your program problem1.c, to a new file called problem2.c. Remember the
+napping() function you created for your prelab assignment? In your Philosopher
+function, add calls to napping() to try to encourage deadlock to occur.
+Experiment with where to insert these calls and also with the lengths of naps
+until you do observe deadlock in your test runs.
+	Score: 12 / 12
+Problem 2 - Answers: Describe the situation you observed which lead to deadlock. (4 points for any
+answers + 4 points for a correct answer)
+	Score: 8 / 8
+Problem 3.1 - Left - Right: Each Philosopher thread can pick up its right chopstick first, if its id
+number is odd, otherwise it picks up its left chopstick first.
+	Score: 8 / 8
+Problem 3.2 - Lowest First: Each Philosopher thread picks the lowest-numbered chopstick it needs first.
+	Score: 8 / 8
+Problem 3 - Answers: Discuss whether these solutions eliminate all the potential causes of
+deadlock. If you conclude that they don’t, indicate what problem(s) can still
+occur.
+	Score: 2 / 4
+	Comment: -2: these solutions eliminate potential deadlock because it stops circular wait, one of the 4 requirements
+
+------------------------------------------------------------
+TOTAL 96.0 / 100
+------------------------------------------------------------
+
