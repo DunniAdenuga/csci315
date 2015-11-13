@@ -3,6 +3,10 @@
 #include <readline/history.h>
 #include <unistd.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
+#define TRUE 0
 extern char **environ;
 
 char* command;
@@ -23,7 +27,13 @@ int main(){
     if(pid > 0)//parent process
       {
 	wait(&status);
+	if(WIFEXITED(&status) == TRUE){
+	  printf("[ishell: program terminated successfully]\n");
   }
+	else{
+	  printf("[ishell: program terminated abnormally][return status: %d]\n", status);
+	}
+      }
     else//child process
       {
 	count = 0;
