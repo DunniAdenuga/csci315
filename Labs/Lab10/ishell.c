@@ -31,7 +31,7 @@ int main(){
     command = readline("ishell> ");
     strcat(command, ";");
     tokenizeBySemiColon(command, &firstInstruction, &secondInstruction);
-    printf("%s\n", firstInstruction);
+    // printf("%s\n", firstInstruction);
     //printf("%s\n", secondInstruction);
     if((pid = fork()) == -1){
       perror("Perror fork!");
