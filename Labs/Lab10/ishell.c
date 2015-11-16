@@ -5,51 +5,70 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-
-#define TRUE 0
+#include <stdlib.h>
+#include <stdbool.h>
 extern char **environ;
 
-char* command;
+
+char* tokenizer(char* instruction);
+void tokenizeBySemiColon(char* command, char** firstInstruction, char** secondInstruction);
+int runFirst(char* firstInstruction);
+void runSecond(char* secondInstruction);
 int count;
-char* tokenizer(void);
 int main(){
   
-  pid_t pid;
-  int status;
-  char *argvs[50];
+ 
+  
   while(1){
-    //printf("ishell> ");
+     pid_t pid = NULL;
+     int status= NULL;
+     int status2 = NULL;
+     pid_t pid2 = NULL;
+     char* command = NULL;
+    
+    char *firstInstruction = NULL;
+    char *secondInstruction = NULL;
     command = readline("ishell> ");
-
+    strcat(command, ";");
+    tokenizeBySemiColon(command, &firstInstruction, &secondInstruction);
+    printf("%s\n", firstInstruction);
+    //printf("%s\n", secondInstruction);
     if((pid = fork()) == -1){
-      return (0);
+      perror("Perror fork!");
     }
     if(pid > 0)//parent process
       {
 	wait(&status);
-	if(WIFEXITED(&status) == TRUE){
+	if(WIFEXITED(status) == true){
+	  if((pid2 = fork()) == -1){
+      perror("Perror fork!");
+	  }
+	  if(pid2 > 0){//still parent
 	  printf("[ishell: program terminated successfully]\n");
-  }
+	  kill(pid , SIGKILL);
+	  wait(&status2);
+	  }
+	  else{
+	    if(secondInstruction != NULL){
+	    runSecond(secondInstruction);
+	    // kill(pid2, SIGKILL);
+	    return(0);
+	    }
+	    else{
+	      return(0);
+	    }
+	  }
+	}
 	else{
 	  printf("[ishell: program terminated abnormally][return status: %d]\n", status);
 	}
       }
-    else//child process
+    else//1st child process
       {
-	count = 0;
-	//char *token1 = tokenizer();
-	char *file = tokenizer();
-	int i = 1;
-	
-	char *token = tokenizer();
-	while( token != NULL){
-	  argvs[i] = token;
-	  i++;
-	  token = tokenizer();
-	}
-	argvs[i] = NULL;
-	execvp(file, argvs);
+	 runFirst(firstInstruction);
+	 exit(1);
     }
+    
 }
   return 0;
 }
@@ -57,12 +76,13 @@ int main(){
 
 
 
-char *tokenizer(void){
+char *tokenizer(char* instruction){
   
   const char space[2] = " ";
   char *token;
+ 
   if (count == 0){
-  token = strtok(command, space);
+  token = strtok(instruction, space);
   count++;
   }
   else{
@@ -70,3 +90,51 @@ char *tokenizer(void){
   }
   return token;
   }
+
+void tokenizeBySemiColon(char* command, char** firstInstruction, char** secondInstruction){
+
+  const char *semiColon = ";";
+  *firstInstruction  = strtok(command, semiColon);
+  *secondInstruction = strtok(NULL, semiColon);
+  // printf("second - %s\n", *secondInstruction);
+  
+}
+
+int runFirst(char* firstInstruction){
+ char *argvs[50];
+	count = 0;
+	//char *token1 = tokenizer();
+	char *file = tokenizer(firstInstruction);
+	//printf("here %s\n", file);
+	int i = 1;
+	
+	char *token = tokenizer(firstInstruction);
+	while( token != NULL){
+	  argvs[i] = token;
+	  //printf("%s\n", argvs[i]);
+	  i++;
+	  token = tokenizer(firstInstruction);
+	}
+	argvs[i] = NULL;
+	execvp(file, argvs);
+	return 0;
+	
+}
+void runSecond(char* secondInstruction){
+  char *argvs[50];
+	count = 0;
+	//char *token1 = tokenizer();
+	char *file = tokenizer(secondInstruction);
+	//printf("%s\n", file);
+	int i = 1;
+	
+	char *token = tokenizer(secondInstruction);
+	while( token != NULL){
+	  argvs[i] = token;
+	  i++;
+	  token = tokenizer(secondInstruction);
+	}
+	argvs[i] = NULL;
+	execvp(file, argvs);
+	
+	}
