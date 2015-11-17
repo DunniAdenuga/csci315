@@ -1,0 +1,21 @@
+------------------------------------------------------------
+Lab8 feedback for Adenuga, Dunni (ia005)
+------------------------------------------------------------
+Problem 1: 1. In light of what you read about the operating system’s protection of the memory space of each process, describe what constitutes the segmentation fault error that you have been observing since you started programming in C. (4 points)
+  2. The operating system must keep track of which portions of memory have been “doled out” to a process (that is, IN USE) and which portions are FREE. In this lab, you will implement a custom memory allocator, which will keep track of allocated and free memory chunks using doubly-linked lists. What are the positives and the negatives of using this data structure in this problem? (4 points)
+  3. Reflect on how typical C programs that call malloc and free cause the operating system to work with its lists of allocated and free portions of memory. Argue whether doubly-linked lists are either efficient or perhaps the best data structures to use in your custom memory allocator. Propose at least one other data structure that might work as well or possibly better than doubly-linked lists for keeping track of allocated and free memory. (4 points)
+  4. Define the term external fragmentation and describe a scenario where it occurs. (3 points)
+  5. Define the term internal fragmentation and describe a scenario where it occurs. (3 points)
+  6. Describe the first-fit allocation policy. Give one advantage and one disadvantage of its use. (4 points)
+  7. Describe the best-fit allocation policy. Give one advantage and one disadvantage of its use. (4 points)
+  8. Describe the worst-fit allocation policy. Give one advantage and one disadvantage of its use. (4 points)
+	Score: 30 / 30
+Problem 2 [design]: A clear explanation of the design of your supporting functions for dealing
+with various policies for contiguous memory allocation (best-fit, first-fit,
+and worst-fit). Your document should describe the API of your functions and
+how they are used in your custom memory allocator.
+	Score: 10 / 10
+------------------------------------------------------------
+TOTAL 40.0 / 100
+------------------------------------------------------------
+
