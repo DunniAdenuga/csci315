@@ -1,3 +1,9 @@
+/*
+Cat(used as readout)- read a file:preferably files in current directory and print contents to stdout
+name: readout
+if more than one file it concatenates all files sent to it and prints to stdout
+To use, enter: readout fileName1 fileName2
+ */
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -14,6 +20,7 @@ char* tokenizer(char* instruction);
 void tokenizeBySemiColon(char* command, char** firstInstruction, char** secondInstruction);
 int runFirst(char* firstInstruction);
 void runSecond(char* secondInstruction);
+int runCat(char* instruction, char* argvs[]);
 void runEnter(void);
 int count;
 int noOfEnters;
@@ -148,7 +155,12 @@ int runFirst(char* firstInstruction){
 	  token = tokenizer(firstInstruction);
 	}
 	argvs[i] = NULL;
+	if(strcmp(file, "readout") != 0){
 	execvp(file, argvs);
+	}
+	else{
+	  runCat(file, argvs);
+	}
 	return 0;
 	
 }
@@ -167,7 +179,12 @@ void runSecond(char* secondInstruction){
 	  token = tokenizer(secondInstruction);
 	}
 	argvs[i] = NULL;
+	if(strcmp(file, "readout") != 0){
 	execvp(file, argvs);
+	}
+	else{
+	  runCat(file, argvs);
+	}
 	
 	}
 
@@ -186,4 +203,26 @@ void runEnter(void){
   execlp("ls", "ls", (char *) NULL);
   }
   //exit(0);
+}
+
+/*
+Bash's cat,- read a file and print contents to stdout
+name - readout
+ */
+int runCat(char* instruction, char* argvs[]){
+  FILE* file;
+  int i = 1;
+  //int fd;
+  int c;
+  char* buffer;
+  if(strcmp(instruction, "readout") == 0){
+    while(argvs[i] != NULL){
+    file = fopen(argvs[i], "r");
+    while ((c = getc(file)) != EOF)
+        putchar(c);
+    fclose(file);
+    i++;
+    }    
+  } 
+  return 0;
 }
