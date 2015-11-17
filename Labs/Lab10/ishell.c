@@ -14,7 +14,9 @@ char* tokenizer(char* instruction);
 void tokenizeBySemiColon(char* command, char** firstInstruction, char** secondInstruction);
 int runFirst(char* firstInstruction);
 void runSecond(char* secondInstruction);
+void runEnter(void);
 int count;
+int noOfEnters;
 int main(){
   
  
@@ -24,15 +26,26 @@ int main(){
      int status= NULL;
      int status2 = NULL;
      pid_t pid2 = NULL;
-     char* command = NULL;
+     char* command = (char *) NULL;
     
     char *firstInstruction = NULL;
     char *secondInstruction = NULL;
     command = readline("ishell> ");
-    strcat(command, ";");
+    if(strcmp(command, "") == 0){
+      noOfEnters++;
+      // printf("no -%d\n", noOfEnters);
+       if(noOfEnters == 2){
+	 noOfEnters = 0;
+	    runEnter();
+	    //noOfEnters = 0;
+	  }
+       //exit(1);
+    }
+    
+    
+    else{
+    //strcat(command, ";");
     tokenizeBySemiColon(command, &firstInstruction, &secondInstruction);
-    // printf("%s\n", firstInstruction);
-    //printf("%s\n", secondInstruction);
     if((pid = fork()) == -1){
       perror("Perror fork!");
     }
@@ -40,6 +53,7 @@ int main(){
       {
 	wait(&status);
 	if(WIFEXITED(status) == true){
+	  
 	  if((pid2 = fork()) == -1){
       perror("Perror fork!");
 	  }
@@ -47,33 +61,43 @@ int main(){
 	  printf("[ishell: program terminated successfully]\n");
 	  kill(pid , SIGKILL);
 	  wait(&status2);
+	  
 	  }
+
 	  else{
-	    if(secondInstruction != NULL){
+	    if(secondInstruction != (char *)NULL){
 	    runSecond(secondInstruction);
 	    // kill(pid2, SIGKILL);
-	    return(0);
+	    exit(1);
 	    }
 	    else{
-	      return(0);
+	      //return (0);
+	      exit(1);
 	    }
+	  
 	  }
-	}
+	  }
+	  
+	
 	else{
 	  printf("[ishell: program terminated abnormally][return status: %d]\n", status);
 	}
+	
       }
     else//1st child process
       {
+	if(strcmp(firstInstruction, "null") != 0){
+	  
 	 runFirst(firstInstruction);
 	 exit(1);
+	}
+     
     }
-    
+    }
+  
 }
-  return 0;
+return 0;
 }
-
-
 
 
 char *tokenizer(char* instruction){
@@ -94,9 +118,17 @@ char *tokenizer(char* instruction){
 void tokenizeBySemiColon(char* command, char** firstInstruction, char** secondInstruction){
 
   const char *semiColon = ";";
+  if (strcmp(command, ";") == 0){
+    *firstInstruction = "null";
+    *secondInstruction = "null";
+  }
+  else{
   *firstInstruction  = strtok(command, semiColon);
   *secondInstruction = strtok(NULL, semiColon);
-  // printf("second - %s\n", *secondInstruction);
+  }
+  //printf("%s\n", command);
+  //printf("%s\n", *firstInstruction);
+  //printf("second - %s\n", *secondInstruction);
   
 }
 
@@ -138,3 +170,20 @@ void runSecond(char* secondInstruction){
 	execvp(file, argvs);
 	
 	}
+
+void runEnter(void){
+  pid_t pid;
+  if((pid = fork()) ==  -1){
+    perror("fork for enter function error");
+  }
+  int status;
+  if(pid > 0){
+    wait(&status);
+    kill(pid, SIGKILL);
+  }
+  else{
+    
+  execlp("ls", "ls", (char *) NULL);
+  }
+  //exit(0);
+}
