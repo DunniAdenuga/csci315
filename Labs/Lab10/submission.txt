@@ -1,0 +1,9 @@
+1. Problem 1 was completed and works well.
+
+ 2. Problem 2 was completed and works well.
+
+3. Problem 3 was completed and works well.
+
+4. Problem 4 is not done. Still has lot of issues. Working on it.
+
+5. Problem 5 was completed in ishell5.c file and works well. Makefile was modified to use this. Thank you.
