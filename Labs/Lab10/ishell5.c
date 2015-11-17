@@ -1,6 +1,7 @@
 /*
 Cat- read a file:preferably files in current directory and print contents to stdout
-To use, enter: cat fileName
+if more than one file it concatenates all files sent to it and prints to stdout
+To use, enter: cat fileName1 fileName2
  */
 
 #include <stdio.h>
@@ -21,7 +22,7 @@ char* tokenizer(char* instruction);
 void tokenizeBySemiColon(char* command, char** firstInstruction, char** secondInstruction);
 int runFirst(char* firstInstruction);
 void runSecond(char* secondInstruction);
-int runCat(char* instruction, char* fileName);
+int runCat(char* instruction, char* argvs[]);
 int count;
 int main(){
   
@@ -129,7 +130,7 @@ int runFirst(char* firstInstruction){
 	execvp(file, argvs);
 	}
 	else{
-	  runCat(file, argvs[1]);
+	  runCat(file, argvs);
 	}
 	return 0;
 	
@@ -153,23 +154,26 @@ void runSecond(char* secondInstruction){
 	execvp(file, argvs);
 	}
 	else{
-	  runCat(file, argvs[1]);
+	  runCat(file, argvs);
 	}
 }
 /*
 Cat- read a file and print contents to stdout
  */
-int runCat(char* instruction, char* fileName){
+int runCat(char* instruction, char* argvs[]){
   FILE* file;
+  int i = 1;
   //int fd;
   int c;
   char* buffer;
   if(strcmp(instruction, "cat") == 0){
-    file = fopen(fileName, "r");
+    while(argvs[i] != NULL){
+    file = fopen(argvs[i], "r");
     while ((c = getc(file)) != EOF)
         putchar(c);
     fclose(file);
-    
+    i++;
+    }    
   } 
   return 0;
 }
