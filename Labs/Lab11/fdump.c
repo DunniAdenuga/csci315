@@ -8,7 +8,7 @@ int main(int argc, char* argv[]){
   char fileName[256];
   unsigned int   offset;
   unsigned int size;
-  char* buffer;
+  char buffer[999] ;
   FILE *file;
   if(argc != 4){
     printf("Usage: fdump [fileName: char[]] [offset: int] [size: int]\n");
@@ -24,10 +24,11 @@ int main(int argc, char* argv[]){
     //int no = read(fd = fileno(file), (void *)buffer, size);
     //printf("file - %s, no - %d, fd -%d\n", buffer, no, fd);
     
-    fgets(buffer, size+1, file);
-    printf("buffer %s\n", buffer);
+    //fgets(buffer, size+1, file);
+    fread(buffer, 1, size, file);
+    //printf("buffer %s\n", buffer);
     //printf("file - %s, no - %d, fd -%d\n", buffer, no, fd);
-    hexdump(buffer, strlen(buffer));
+    hexdump((unsigned char*)buffer, (unsigned int)size);
     printf("\n");
     close(fileno(file));
   }
