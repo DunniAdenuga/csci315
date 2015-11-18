@@ -1,0 +1,65 @@
+1. a)Single-Level Directory
+Advantages
+i.Simple, Easy to support and understand.
+Disadvantages
+i.Files must have unique and this may lead to conflict in multi-user system.
+b)Two-Level Directory
+Advantages
+i.Solves the file name conflict problem of the single level directory
+Disadvantages
+i.To access a file in another user's directory, one needs whole path name.
+c)Tree-Structured Directories
+Advantages
+i.Users can access their files and other users files.
+Disadvantages
+i.Complex. Not easy to delete
+d)Acyclic-Graph Directories
+Advantages
+i.More flexible than tree structure. Original Directories can be shared among users.
+Disadvantages
+i.Too complex, deletion complications.
+e)General Graph Directory
+Advantages
+i.No need to manually avoid cycles.
+Disadvantages
+i.Acyclic-Graph is easier to work with and traverse through.
+
+2.Hardlinks points to the actual file while soft link points only to the file name, it makes an alias.
+
+3. Soft links only create symbols/aliases for a file.
+ln -s {originalFile} {link-name}
+
+4. ln -P {originalFile} {link-name}
+
+5.junk_soft pointing to a blinking junk.txt
+This means whatever symbolic link junk_soft is pointing to doesn't exist anymorebut it used to be named junk.txt
+
+6.Nothing changed in junk2.txt. "ls -lsa" shows that there there's only one symbolic link pointing to it.This is so because we're dealing with just symbolic links, which act like aliases. So, change in the alias given to the file does not affect the actual file.
+
+7.
+e&g) Nothing wrong/happened.
+   Deleting the hard-link just deleted a pointer or something* like a copy of the file.
+   Doesn'taffect original file.
+
+8. FCB
+A filecontrol block (FCB) (an inode in UNIX file systems) contains information about the file, including ownership, permissions, and location of the file contents.
+
+9. b. 74043602
+   c. 74043602
+same.
+d. Wikipedia
+n a Unix-style file system, the inode is a data structure used to represent a filesystem object, which can be one of various things including a file or a directory.
+Each inode stores the attributes and disk block location(s) of the filesystem object's data. Filesystem object attributes may include manipulation metadata (e.g. change, access, modify time), as well as owner and permission data (e.g. group-id, user-id, permissions).
+
+
+Inode Pointer Structure
+In the past, the structure may have consisted of eleven or thirteen pointers, but most modern file systems use fifteen pointers. These pointers consist of (assuming 15 pointers in the inode):
+
+Twelve pointers that directly point to blocks of the file's data (direct pointers)
+One singly indirect pointer (a pointer that points to a block of pointers that then point to blocks of the file's data)
+One doubly indirect pointer (a pointer that points to a block of pointers that point to other blocks of pointers that then point to blocks of the file's data)
+One triply indirect pointer (a pointer that points to a block of pointers that point to other blocks of pointers that point to other blocks of pointers that then point to blocks of the file's data)
+
+10.opendir(3) - opens a directory stream from a given directory name and returns a pointer to the directory stream.
+readdir(3) - returns a pointer to a dirent structure representing the next directory entry(file) in the directory stream.
+closedir(3) - closes directory stream.
