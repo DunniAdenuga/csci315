@@ -1,0 +1,16 @@
+1.open(2)
+-Get current directory from hard-disk(secondary structure)
+-Place in memory
+-Find file if it exists, get file control block from secondary storage
+-Return file descriptor 
+The argument is the path name for file, so it can search for the file in the current directory or directory specified in pathname.
+
+read(2)
+The argument is the file descriptor returned by open, a buffer to store what's read and count, number of bytes to be read from file.
+-Checks for file descriptor in open file table which has a ponter to a system wide open file table that contains the file control block of files open by processes in the system..
+-The FCB has details about file location, size, permissions etc so we can now read it from the the secondary storage.
+
+
+2. If a system-wide file table is kept, it would help avoid redundancy. If a process already has a file open, no need for another process to open another copy.
+
+3. It is useful. Memory is volatile, once a computer is off, memory is wiped clean. Having a secondary storage ensures we have a stable copy of the file and it can still be accessed.
