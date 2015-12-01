@@ -24,7 +24,7 @@ CC = gcc
 
 CFLAGS = -g -Wall
 
-EXE = file_stat read_dir fdump
+EXE = file_stat read_dir fdump traverse
 
 all: $(EXE)
 
@@ -33,6 +33,12 @@ file_stat: file_stat.o
 
 file_stat.o: file_stat.c
 	$(CC) -c $(CFLAGS) file_stat.c
+
+traverse.o: traverse.c
+	$(CC) -c $(CFLAGS) traverse.c
+
+traverse: traverse.o
+	$(CC) $(CFLAGS) -o traverse traverse.o
 
 read_dir: read_dir.o
 	$(CC) -o read_dir read_dir.o
