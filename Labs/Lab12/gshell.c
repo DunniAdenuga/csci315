@@ -4,10 +4,17 @@
  *Dunni Adenuga
  **/
 /*
-Cat(used as readout)- read a file:preferably files in current directory and print contents to stdout
+New Features:
+-Cat(used as readout)- read a file:preferably files in current directory and print contents to stdout
 name: readout
 if more than one file it concatenates all files sent to it and prints to stdout
 To use, enter: readout fileName1 fileName2
+- exit
+exits shell
+: works indidually
+- ^
+does previous instruction
+: works individually
  */
 #include <stdio.h>
 #include <readline/readline.h>
