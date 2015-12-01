@@ -1,0 +1,12 @@
+(3.1) 
+chmod +x filePath
+(3.2)
+cp someFile.txt testFile.txt
+
+where testFile.txt is the regular file being observed
+
+(3.3)
+touch -a testFile.txt
+
+(3.4)
+An application that stores a list of all the files in a system would need the maximum file name length to have enough space for the file names.
