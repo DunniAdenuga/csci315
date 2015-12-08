@@ -1,0 +1,5 @@
+1. Completed and works.
+
+2. Completed and works but not perfectly.
+HHave to run instruction twice.
+Also instruction does not terminate.

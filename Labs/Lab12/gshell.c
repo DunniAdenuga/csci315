@@ -34,6 +34,7 @@ int runFirst(char* firstInstruction);
 void runSecond(char* secondInstruction);
 int runCat(char* instruction, char* argvs[]);
 void runEnter(void);
+int runIO(char* string1, char* string2);
 int count;
 int noOfEnters;
 int main(){
@@ -41,16 +42,26 @@ int main(){
   char *prev_command = "";
   
   while(1){
-     pid_t pid = NULL;
-     int status= NULL;
-     int status2 = NULL;
-     pid_t pid2 = NULL;
+     pid_t pid ;
+     int status;
+     int status2;
+     pid_t pid2;
      char* command = (char *) NULL;
-     
+     char*  stringValue = (char *) NULL;
+     char*  stringValue1 = (char *) NULL;
+     char* stringValue2 = (char *) NULL;
      char *firstInstruction = NULL;
      char *secondInstruction = NULL;
 
      command = readline("gshell> ");
+      stringValue = strstr(command, "|");
+     if(stringValue != NULL){
+       stringValue1 = strtok(command, "|");
+       stringValue2 = strtok(NULL, "|");
+       //printf("io\n");
+       runIO(stringValue1, stringValue2);
+       //exit(1);
+       }
 
      if(strcmp(command, "^") == 0){
        if(strcmp(prev_command, "") != 0){
@@ -58,9 +69,9 @@ int main(){
 	 command = prev_command;
 	 //signal the user previous command is being executed
 	 printf("Executing: %s\n", command);
-       }else{
-	 //set prev_command
-	 prev_command = command;
+     }else{
+       //set previous command
+       prev_command = command;
        }
      }else{
        //set previous command
@@ -79,7 +90,13 @@ int main(){
      }else if(strcmp(command, "exit")==0){
        printf("Exiting gshell\n");
        exit(0);
-     }else{
+     }/**else if(strcmp((stringValue = strtok(command, "|")), NULL ) != 0){
+       stringValue2 = strtok(NULL, "|");
+       printf("io\n");
+       runIO(stringValue, stringValue2);
+       }**/
+    
+     else{
        //strcat(command, ";");
        tokenizeBySemiColon(command, &firstInstruction, &secondInstruction);
        if((pid = fork()) == -1){
@@ -254,4 +271,90 @@ int runCat(char* instruction, char* argvs[]){
     }    
   } 
   return 0;
+}
+	     
+	    
+
+
+
+int runIO(char* string1, char* string2){
+  //printf("string1 - %s\n", string1);
+  //printf("string2 - %s\n", string2);
+int status;
+ int status2;
+  //int pcfd[2];//file desc(read from p to c
+int cpfd[2];//file desc from c to p
+int pid;
+ int pid2;
+
+//pipe(pcfd);
+ pipe(cpfd);
+ 
+ pid  = fork();
+ if(pid > 0){
+   wait(&status);
+   pid2 = fork();
+   if(pid2 > 0)//parent
+     {
+       kill(pid, SIGKILL);
+       wait(&status2);
+       printf("here5- ");
+       //kill(pid2, SIGKILL);
+     }
+   else{//second child
+     char *argvs[50];
+  //char *token1 = tokenizer();
+  char *file = tokenizer(string2);
+  //printf("here %s\n", file);
+  int i = 1;
+  
+  char *token = tokenizer(string2);
+  while( token != NULL){
+    argvs[i] = token;
+    //printf("%s\n", argvs[i]);
+    i++;
+    token = tokenizer(string2);
+  }
+  argvs[i] = NULL;
+  
+  close(cpfd[1]);
+  
+  dup2(cpfd[0], 0); 
+  close(cpfd[0]);
+  //printf("k - %s", file);
+   execvp(file, argvs);
+   //return 1;
+   }
+ }
+ else{//1st child 
+
+//child process
+  char *argvs[50];
+  count = 0;
+  //char *token1 = tokenizer();
+  char *file = tokenizer(string1);
+  // printf("argvs 0: %s\n", file);
+  int i = 1;
+  
+  char *token = tokenizer(string1);
+  while( token != NULL){
+    argvs[i] = token;
+    //printf("%s\n", argvs[i]);
+    i++;
+    token = tokenizer(string1);
+  }
+  argvs[i] = NULL;
+  //int x = 1;
+   
+  close(cpfd[0]);//close reading
+  dup2(cpfd[1], 1); 
+  close(cpfd[1]);
+   printf("k - %s\n", file);
+  execvp(file, argvs);
+  
+  //return 1;
+ }
+ 
+ 
+ //return 0;
 }
