@@ -1,0 +1,65 @@
+------------------------------------------------------------
+Lab11 feedback for Adenuga, Dunni (ia005)
+------------------------------------------------------------
+Prelab-Problem 1: fdump: Create a C program called fdump.c that works as described below.
+
+  * The program must accept the following command line parameters, in the order given: filename (a C array), offset (unsigned integer), and size (unsigned integer). If the three command line parameters are not provided by the user, the program must terminate immediately with an error message and indicate the proper usage (that is, the order and the types of command line parameters expected).
+  * The program opens the file indicated by filename with fopen(3), moves forward the file position indicator by the number of bytes indicated by offset, and reads size bytes from filename into a buffer. (Hint: you will need to make a call to a random access library function to get to the right read location into the user-specified file.)
+  * Once that data is read into your program’s buffer, make it call the function hexdump provided to you in files hexdump.h and hexdump.c. The output generated will resemble the exemple below, which is similar to what is produced by the xxd Unix utility.
+  * Close the file and terminate.
+  * Create a Makefile to generate your fdump executable. You should compile hexdump.c separately into an object that gets linked with the compilation of fdump.c at a later point.
+	Score: 0 / 15
+	Comment: error in makefile so i couldn't execute fdump
+
+Prelab-Problem 2: answers: When you are done coding and debugging, record your answers to the questions
+below in prelab.txt:
+
+  * (2.1): Run your fdump program with the following parameters: filename = hexdump.c, offset=1000, size=128. Explain what you see.
+  * (2.2): Run your fdump program with the following parameters: filename = fdump, offset=500, size=128. Explain what you see.
+  * (2.3): Compare the output you produced for answers (2.1) and (2.2). Looking at the hexadecimal dump on the left, in both cases, makes it clear that inside both files, you store information in binary encoding. However, the data to the right of the hexadecimal dump shows something human-readable for (2.1) and non-human readable for (2.2). In this answer, you are asked to explain why this is the case.
+  * (2.4): Now, run the file(1) command on the files below and do your best to interprete the results. (You can always look at the man page for file to learn what it does…)
+  * /usr/bin/file,
+  * ~cs315/Labs/Lab11/work
+  * ~cs315/Labs/Lab11/beauty
+  * Your separately compiled hexdump.o
+  * hexdump.h
+  * Do some research to discover how file(1) figures out the type of content in these files. Record your findings in this answer along with citations to the sources you used.
+	Score: 15 / 15
+Lab Problem 1: file_stat: First, work on file_stat.c and instrument it to print the information marked
+in red (that is, tackle the TO-DOs in the code). Next, augment the program to
+print the time of last access and the time of status change for the file given
+as command-line parameter. Note that you will need to read the man pages for
+getpwuid(3) and getgrgid(3) to learn how to translate numeric USER ID and
+GROUP IP to strings, respectively. Make sure to use versions of these calls
+which are thread-safe – Why you ask? Just to continue the practice of using
+functions that are thread-safe.
+	Score: 20 / 20
+Lab Problem 2: traverse: First, work on file_stat.c and instrument it to print the information marked
+in red (that is, tackle the TO-DOs in the code). Next, augment the program to
+print the time of last access and the time of status change for the file given
+as command-line parameter. Note that you will need to read the man pages for
+getpwuid(3) and getgrgid(3) to learn how to translate numeric USER ID and
+GROUP IP to strings, respectively. Make sure to use versions of these calls
+which are thread-safe – Why you ask? Just to continue the practice of using
+functions that are thread-safe.
+	Score: 0 / 20
+	Comment: threw an error when attempting to run traverse
+
+Lab Problem 3: answers: 1. (3.1) Provide an example of an operation on a regular file which changes only it’s time of last status change.
+  2. (3.2) Provide an example of an operation on a regular file which changes it’s time of modification.
+  3. (3.3) Provide an example of an operation on a regular file which changes it’s time of last access.
+  4. (3.4) Provide an example of an application where knowing the maximum file name length is helpful. In this item, you can simply describe a scenario in which a given program needs to have the maximum length of file names.
+	Score: 8 / 8
+Lab Problem 4: send/recv: We are used to working with files as mechanisms of data storage, but we can
+also use them for interprocess communication. In this problem, you will use a
+file to store the communication between two types of processes (or rather,
+programs): sender.c and receiver.c. The file will work very much like a
+unidirectional channel (a pipe), but one where there can be multiple writers
+and multiple readers.
+	Score: 0 / 22
+	Comment: error in the makefile so I couldn't test send/recv
+
+------------------------------------------------------------
+TOTAL 43.0 / 100
+------------------------------------------------------------
+
